@@ -86,16 +86,16 @@ SELECT * FROM TBL_API;
 
 DROP TABLE IF EXISTS TBL_LIBRARY;
 CREATE TABLE TBL_LIBRARY (
-	L_NO 				INT AUTO_INCREMENT,
+	L_NO				INT AUTO_INCREMENT,
     L_CODE				INT NOT NULL,				-- 도서관 코드
     L_NAME				VARCHAR(30) NOT NULL,		-- 도서관 명
     L_ADDRESS			VARCHAR(50) NOT NULL,		-- 도서관 주소
-    L_TEL				INT NOT NULL,				-- 도서관 전화번호
-    L_LATITUDE			INT NOT NULL,				-- 도서관 위도
-    L_LONGITUDE			INT NOT NULL,				-- 도서관 경도
-    L_HOMEPAGE			VARCHAR(30) NOT NULL,		-- 도서관 홈페이지 URL
-    L_CLOSED			VARCHAR(100) NOT NULL,		-- 도서관 휴관일
-    L_OPERATION_TIME	VARCHAR(50) NOT NULL,		-- 도서관 운영시간
+    L_TEL				VARCHAR(20) NOT NULL,		-- 도서관 전화번호
+    L_LATITUDE			DOUBLE NOT NULL,			-- 도서관 위도
+    L_LONGITUDE			DOUBLE NOT NULL,			-- 도서관 경도
+    L_HOMEPAGE			TEXT NOT NULL,				-- 도서관 홈페이지 URL
+    L_CLOSED			TEXT NOT NULL,				-- 도서관 휴관일
+    L_OPERATION_TIME	TEXT NOT NULL,				-- 도서관 운영시간
     L_REG_DATE 			DATETIME DEFAULT NOW(),     -- 등록 날짜
     L_MOD_DATE 			DATETIME DEFAULT NOW(),     -- 수정 날짜
     PRIMARY KEY (L_NO)
