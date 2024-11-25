@@ -19,7 +19,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		log.info("addResourceHandlers");
 		
-		registry.addResourceHandler("/eventImg/**")
+		registry.addResourceHandler("/event_images/**")
 				.addResourceLocations(serverResourceEventImg);
 		
 	}

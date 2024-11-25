@@ -26,4 +26,14 @@ public class EventService {
 		iEventMapper.insertEvent(eventDto);
 	}
 
+	public EventDto getEventById(int eventId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void modifyEvent(int eventId, EventDto eventDto) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
