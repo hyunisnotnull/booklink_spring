@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.booklink.event.IEventMapper">
+
+	<select id="getEventList" resultType="com.office.booklink.event.EventDto">
+        SELECT *
+        FROM TBL_EVENT
+    </select>
+    
+    <insert id="insertEvent" parameterType="com.office.booklink.event.EventDto">
+	    INSERT INTO TBL_EVENT (E_TITLE, E_IMAGE, E_URL, E_DESC, E_ACTIVE, E_START_DATE, E_END_DATE)
+	    VALUES (#{e_title}, #{e_image}, #{e_url}, #{e_desc}, #{e_active}, #{e_start_date}, #{e_end_date})
+	</insert>
+
+</mapper>
