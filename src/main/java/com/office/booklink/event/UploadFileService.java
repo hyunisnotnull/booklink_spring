@@ -30,7 +30,7 @@ public class UploadFileService {
 		String fileOriName = file.getOriginalFilename();
 		String fileExtension = fileOriName.substring(fileOriName.lastIndexOf("."), fileOriName.length());
 		
-		String uploadDir = serverStaticProfileImg + e_no;
+		String uploadDir = serverStaticProfileImg;
 		
 		UUID uuid = UUID.randomUUID();
 		String uniqueFileName = uuid.toString().replaceAll("-", "");
