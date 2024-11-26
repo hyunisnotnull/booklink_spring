@@ -22,7 +22,7 @@ public class UploadFileService {
 	@Value("${server.dir-separator}")
 	private String serverDirSeparator;
 	
-	public String upload(String e_no, MultipartFile file) {
+	public String upload(String e_title, MultipartFile file) {
 		log.info("upload()");
 		
 		boolean result = false;
@@ -30,7 +30,7 @@ public class UploadFileService {
 		String fileOriName = file.getOriginalFilename();
 		String fileExtension = fileOriName.substring(fileOriName.lastIndexOf("."), fileOriName.length());
 		
-		String uploadDir = serverStaticProfileImg;
+		String uploadDir = serverStaticProfileImg + e_title;
 		
 		UUID uuid = UUID.randomUUID();
 		String uniqueFileName = uuid.toString().replaceAll("-", "");

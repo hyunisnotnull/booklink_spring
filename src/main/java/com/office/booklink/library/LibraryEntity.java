@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "TBL_LIBRARY")
-public class LibraryDto {
+public class LibraryEntity {
 	
 	@Id
     @JsonProperty("libCode")

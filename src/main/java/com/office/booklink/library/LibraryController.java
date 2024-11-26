@@ -20,7 +20,7 @@ public class LibraryController {
 
 	// 도서관 정보 업데이트 API
     @PostMapping("/update")
-    public String updateLibrary(@RequestBody List<LibraryDto> libraries) {
+    public String updateLibrary(@RequestBody List<LibraryEntity> libraries) {
         try {
 
         	log.info("Received libraries data: {}", libraries);
