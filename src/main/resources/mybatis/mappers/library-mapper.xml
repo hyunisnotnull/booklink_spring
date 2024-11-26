@@ -3,4 +3,17 @@
 
 <mapper namespace="com.office.booklink.library.LibraryMapper">
 
+<select id="searchName"
+		parameterType="String" 
+		resultType="com.office.booklink.library.LibraryDto">
+		SELECT * FROM TBL_LIBRARY
+		WHERE L_LIB_NAME LIKE CONCAT('%', #{NAME}, '%')
+</select>
+
+<select id="searchRegion"
+		parameterType="String" 
+		resultType="com.office.booklink.library.LibraryDto">
+		SELECT * FROM TBL_LIBRARY
+		WHERE L_ADDRESS LIKE CONCAT('%', #{region}, '%')
+</select>
 </mapper>

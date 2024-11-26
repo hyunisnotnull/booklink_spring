@@ -23,4 +23,16 @@ public class LibraryService {
             libraryRepository.save(library);
         }
     }
+
+	public List<LibraryDto> searchRegion(String region) {
+		log.info("search library with region: {}", region);
+		
+		return searchRegion(region);
+	}
+
+	public List<LibraryDto> searchName(String name) {
+		log.info("search library with name: {}", name);
+		
+		return searchName(name);
+	}
 }
