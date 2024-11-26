@@ -2,7 +2,6 @@ package com.office.booklink.library;
 
 import java.util.List;
 
-import org.apache.tomcat.jni.Library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +14,8 @@ public class LibraryService {
 	@Autowired
     private LibraryRepository libraryRepository;
 
-	public void saveLibraries(List<LibraryDto> libraries) {
-        for (LibraryDto library : libraries) {
+	public void saveLibraries(List<LibraryEntity> libraries) {
+        for (LibraryEntity library : libraries) {
             
         	log.info("Saving library: {}", library);
         	
