@@ -14,7 +14,13 @@ public class LibraryService {
 
 	@Autowired
     private LibraryRepository libraryRepository;
+	private LibraryDao libraryDao;
 
+	public LibraryService (LibraryDao libraryDao) {
+		this.libraryDao = libraryDao;
+		
+	}
+	
 	public void saveLibraries(List<LibraryDto> libraries) {
         for (LibraryDto library : libraries) {
             
@@ -27,12 +33,12 @@ public class LibraryService {
 	public List<LibraryDto> searchRegion(String region) {
 		log.info("search library with region: {}", region);
 		
-		return searchRegion(region);
+		return libraryDao.searchRegion(region);
 	}
 
 	public List<LibraryDto> searchName(String name) {
 		log.info("search library with name: {}", name);
 		
-		return searchName(name);
+		return libraryDao.searchName(name);
 	}
 }

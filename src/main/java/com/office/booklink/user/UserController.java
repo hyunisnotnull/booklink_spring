@@ -30,15 +30,23 @@ public class UserController {
 	public ResponseEntity<Object> isUser(@RequestBody UserDto user) {
 		log.info("[userController] isUser()");
 		System.out.println(user);
-//		userService.isUser(user);
-
-//		UserDto loginedUsrDto = userService.isUser(u_id, u_pw);
-//		if (loginedUserDto != null)
-//			session.setAttribute("loginedUser", loginedUserDto);
-//		else
-//			nextPage = "member/login_ng";
+		UserDto loginedUserDto = userService.isUser(user);
 		
-		return ResponseEntity.ok(user);
+		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
+		System.out.println(loginedUserDto);
+		return ResponseEntity.ok(loginedUserDto);
+		
+	}
+	
+	@PostMapping("/addUser")
+	public ResponseEntity<Object> addUser(@RequestBody UserDto user) {
+		log.info("[userController] addUser()");
+		System.out.println(user);
+		UserDto loginedUserDto = userService.addUser(user);
+		
+		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
+		System.out.println(loginedUserDto);
+		return ResponseEntity.ok(loginedUserDto);
 		
 	}
 	
@@ -50,7 +58,7 @@ public class UserController {
 //			System.out.println(cookie.getName());
 //				System.out.println(cookie.getValue());
 //		}
-		
+		System.out.println("[userController] testUser()");
 		System.out.println(value);
 		
 		try {

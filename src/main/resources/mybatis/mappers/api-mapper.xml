@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.booklink.library.ApiDao">
+<select id="getCount"
+		parameterType="String" 
+		resultType="int">
+		SELECT COALESCE(MAX(A_COUNT), 0) FROM TBL_API
+		WHERE A_IP = #{userIp} AND DATE(A_MOD_DATE) = CURDATE();
+</select>
+
+<select id="addCount"
+		parameterType="String">
+		UPDATE TBL_API SET A_COUNT = A_COUNT + 1, A_MOD_DATE=NOW()
+		WHERE A_IP = #{userIp}
+</select>
+
+<select id="addNew"
+		parameterType="String">
+		INSERT INTO TBL_API 
+		(A_IP, A_COUNT, A_MOD_DATE) VALUES(#{userIp},1,NOW());
+</select>
+
+
+
+
+</mapper>
