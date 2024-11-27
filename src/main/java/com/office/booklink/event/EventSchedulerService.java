@@ -22,14 +22,31 @@ public class EventSchedulerService {
 
     // 이벤트 종료일에 맞춰 자동으로 비활성화 처리
     public void scheduleEventDeactivation(EventDto eventDto) {
-        // 종료 날짜를 ZonedDateTime으로 변환 (형식에 맞게 처리)
         String endDateString = eventDto.getE_end_date();  
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        ZonedDateTime eventEndDate = ZonedDateTime.of(LocalDateTime.parse(endDateString, formatter), ZoneOffset.ofHours(9));
+        
+        // 두 가지 날짜 형식을 위한 포맷터 정의
+        DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        LocalDateTime localEndDate = null;
+
+        try {
+            localEndDate = LocalDateTime.parse(endDateString, formatter1);
+        } catch (Exception e) {
+            try {
+                localEndDate = LocalDateTime.parse(endDateString, formatter2);
+            } catch (Exception ex) {
+                throw new IllegalArgumentException("Invalid date format: " + endDateString);
+            }
+        }
+
+        // 한국 시간 (KST, UTC+9)으로 ZonedDateTime 변환
+        ZonedDateTime eventEndDate = ZonedDateTime.of(localEndDate, ZoneOffset.ofHours(9));
 
         // 종료일에 맞춰 비활성화 작업을 예약
         taskScheduler.schedule(() -> deactivateEvent(eventDto), eventEndDate.toInstant());
     }
+
 
     // 이벤트 비활성화 작업
     private void deactivateEvent(EventDto eventDto) {
