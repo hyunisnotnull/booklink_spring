@@ -6,6 +6,7 @@
 	<select id="getEventList" resultType="com.office.booklink.event.EventDto">
         SELECT *
         FROM TBL_EVENT
+        ORDER BY E_NO DESC
     </select>
     
     <insert id="insertEvent" parameterType="com.office.booklink.event.EventDto" useGeneratedKeys="true" keyProperty="e_no">
