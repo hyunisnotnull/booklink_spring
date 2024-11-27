@@ -8,9 +8,39 @@
         FROM TBL_EVENT
     </select>
     
-    <insert id="insertEvent" parameterType="com.office.booklink.event.EventDto">
+    <insert id="insertEvent" parameterType="com.office.booklink.event.EventDto" useGeneratedKeys="true" keyProperty="e_no">
 	    INSERT INTO TBL_EVENT (E_TITLE, E_IMAGE, E_URL, E_DESC, E_ACTIVE, E_START_DATE, E_END_DATE)
 	    VALUES (#{e_title}, #{e_image}, #{e_url}, #{e_desc}, #{e_active}, #{e_start_date}, #{e_end_date})
 	</insert>
+	
+	<select id="getEventById" resultType="com.office.booklink.event.EventDto">
+	    SELECT * FROM TBL_EVENT WHERE E_NO = #{eventId}
+	</select>
+	
+	<update id="updateEvent">
+        UPDATE TBL_EVENT
+        SET
+            E_TITLE = #{eventDto.e_title},
+            E_IMAGE = #{eventDto.e_image},
+            E_URL = #{eventDto.e_url},
+            E_DESC = #{eventDto.e_desc},
+            E_ACTIVE = #{eventDto.e_active},
+            E_START_DATE = #{eventDto.e_start_date},
+            E_END_DATE = #{eventDto.e_end_date},
+            E_MOD_DATE = NOW()
+        WHERE E_NO = #{eventId}
+    </update>
+    
+    <update id="updateEventStatus">
+	    UPDATE TBL_EVENT
+	    SET
+	        E_ACTIVE = #{e_active},  
+	        E_MOD_DATE = NOW()       
+	    WHERE E_NO = #{eventId}       
+	</update>
+	
+	<delete id="deleteEvent">
+	    DELETE FROM TBL_EVENT WHERE E_NO = #{eventId}
+	</delete>
 
 </mapper>

@@ -11,7 +11,6 @@ public class UserDto {
 	private int U_NO;
 	private String U_ID;
 	private String U_PW;
-	private String U_MAIL;
 	private String U_PHONE;
 	private String U_SEX;
 	private String U_AGE;

@@ -8,7 +8,6 @@ CREATE TABLE TBL_USER(
 	U_NO                INT AUTO_INCREMENT,
 	U_ID                VARCHAR(20) UNIQUE,
 	U_PW                VARCHAR(100) NOT NULL,
-    U_MAIL				VARCHAR(20) NOT NULL,
 	U_PHONE             VARCHAR(20) NOT NULL,
 	U_SEX               VARCHAR(2) NOT NULL,			-- M(남) W(여)
 	U_AGE               VARCHAR(10) NOT NULL,       	-- 연령대

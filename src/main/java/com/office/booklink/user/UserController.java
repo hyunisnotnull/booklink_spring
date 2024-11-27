@@ -1,5 +1,6 @@
 package com.office.booklink.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -41,12 +42,15 @@ public class UserController {
 	@PostMapping("/addUser")
 	public ResponseEntity<Object> addUser(@RequestBody UserDto user) {
 		log.info("[userController] addUser()");
-		System.out.println(user);
-		UserDto loginedUserDto = userService.addUser(user);
+		if(userService.isUser(user) != null) {
+			return ResponseEntity.ok(new UserDto());
+	               	
+		}
+		userService.addUser(user);
+		UserDto resultDto = new UserDto();
+		resultDto.setU_ID(user.getU_ID());
 		
-		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
-		System.out.println(loginedUserDto);
-		return ResponseEntity.ok(loginedUserDto);
+		return ResponseEntity.ok(resultDto);
 		
 	}
 	

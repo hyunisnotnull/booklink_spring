@@ -14,9 +14,9 @@
 		parameterType="com.office.booklink.user.UserDto" 
 		resultType="com.office.booklink.user.UserDto">
 		insert into tbl_user
-		(U_ID,U_ID, U_PW, U_MAIL, U_PHONE, U_SEX, U_AGE, 
-		U_POST_ADDRESS, U_DETAIL_ADDRESS, U_SNS_ID, U_ACTIVE)
-		VALUES (#{U_ID}, #{U_PW}, #{U_MAIL}, #{U_PHONE}, #{U_SEX}, #{U_AGE}, 
+		(U_ID, U_PW, U_PHONE, U_SEX, U_AGE, 
+		U_POST_ADDRESS, U_DETAIL_ADDRESS)
+		VALUES (#{U_ID}, #{U_PW}, #{U_PHONE}, #{U_SEX}, #{U_AGE}, 
 		#{U_POST_ADDRESS}, #{U_DETAIL_ADDRESS}) 
 </select>
 
