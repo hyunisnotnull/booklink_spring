@@ -13,8 +13,8 @@ public class LibraryDto {
     private String L_NAME;
     private String L_ADDRESS;
     private String L_TEL;
-    private int L_LATITUDE;
-    private int L_LONGITUDE;
+    private double L_LATITUDE;
+    private double L_LONGITUDE;
     private String L_HOMEPAGE;
     private String L_CLOSED;
     private String L_OPERATION_TIME;

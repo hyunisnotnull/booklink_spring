@@ -11,4 +11,8 @@ public interface LibraryDao {
 
 	List<LibraryDto> searchName(String name);
 
+	List<LibraryDto> findByTitle(String title);
+
+	List<LibraryDto> findByTitleAndRegion(String title, String region);
+
 }

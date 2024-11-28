@@ -4,13 +4,17 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.jsonwebtoken.lang.Collections;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
@@ -80,6 +84,29 @@ public class LibraryController {
     	List<LibraryDto> libraries = libraryService.searchName(name);
     	System.out.println(libraries);
             return libraries;
-
     }
+    
+    @GetMapping("/searchByName")
+    public ResponseEntity<List<LibraryDto>> searchLibraryByName(
+	        @RequestParam("title") String title,
+	        @RequestParam(value = "region", required = false) String region) {
+    	log.info("searchByName()", title, region);
+    	
+    	try {
+    		// title과 region에 따라 조건을 다르게 검색
+    		List<LibraryDto> libraries = libraryService.searchLibraryByName(title, region);
+    		
+    		log.info("libraries()", libraries);
+			
+    		return ResponseEntity.ok(libraries);
+    		
+		} catch (Exception e) {
+			log.error("Error during searchByName:", e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body(Collections.emptyList());
+		}
+    	
+    }
+    	
+    
 }
