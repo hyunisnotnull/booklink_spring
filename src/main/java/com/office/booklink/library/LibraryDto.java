@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LibraryDto {
+
 	private int L_NO;
 	private int L_CODE;
     private String L_NAME;
@@ -20,4 +21,5 @@ public class LibraryDto {
     private String L_OPERATION_TIME;
     private String L_REG_DATE;
     private String L_MOD_DATE;
+
 }

@@ -86,6 +86,7 @@ public class LibraryController {
             return libraries;
     }
     
+
     @GetMapping("/searchByName")
     public ResponseEntity<List<LibraryDto>> searchLibraryByName(
 	        @RequestParam("title") String title,
@@ -108,5 +109,13 @@ public class LibraryController {
     	
     }
     	
+
+    // 대출 가능 여부 도서관 찾기
+    @GetMapping("/nearbyLibraries")
+    public List<LibraryDto> getNearbyLibraries(@RequestParam("latitude") double latitude, 
+                                             @RequestParam("longitude") double longitude) {
+        return libraryService.getNearbyLibraries(latitude, longitude);
+    }
+
     
 }
