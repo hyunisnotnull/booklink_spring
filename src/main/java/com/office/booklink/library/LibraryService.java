@@ -15,11 +15,11 @@ public class LibraryService {
 
 	@Autowired
     private LibraryRepository libraryRepository;
-	private LibraryDao libraryDao;
+	private ILibraryMapper iLibraryMapper;
 
 
-	public LibraryService (LibraryDao libraryDao) {
-		this.libraryDao = libraryDao;
+	public LibraryService (ILibraryMapper iLibraryMapper) {
+		this.iLibraryMapper = iLibraryMapper;
 		
 	}
 	
@@ -35,13 +35,13 @@ public class LibraryService {
 	public List<LibraryDto> searchRegion(String region) {
 		log.info("search library with region: {}", region);
 		
-		return libraryDao.searchRegion(region);
+		return iLibraryMapper.searchRegion(region);
 	}
 
 	public List<LibraryDto> searchName(String name) {
 		log.info("search library with name: {}", name);
 		
-		return libraryDao.searchName(name);
+		return iLibraryMapper.searchName(name);
 	}
 
 
@@ -55,11 +55,11 @@ public class LibraryService {
 		
 		// region이 null인지 확인하여 검색 조건 결정
         if (region == null || region.isEmpty()) {
-        	result = libraryDao.findByTitle(title); // region 없이 검색
+        	result = iLibraryMapper.findByTitle(title); // region 없이 검색
         	log.info("findByTitle result::::{}", result);
         	
         } else {
-        	result = libraryDao.findByTitleAndRegion(title, region); // title + region 검색
+        	result = iLibraryMapper.findByTitleAndRegion(title, region); // title + region 검색
         	
         }
         return result;
@@ -69,11 +69,12 @@ public class LibraryService {
 		log.info("Latitude: {}, Longitude: {}", latitude, longitude);
 		
 	    // DB에서 도서관 데이터 조회
-	    List<LibraryDto> libraries = libraryDao.getLibrariesWithinRadius(latitude, longitude);
+	    List<LibraryDto> libraries = iLibraryMapper.getLibrariesWithinRadius(latitude, longitude);
 
 	    log.info("Retrieved libraries: {}", libraries);
 
 	    return libraries;
 
 	}
+	
 }

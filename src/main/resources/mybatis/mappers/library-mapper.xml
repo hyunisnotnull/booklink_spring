@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.office.booklink.library.LibraryMapper">
+<mapper namespace="com.office.booklink.library.ILibraryMapper">
+
+	<select id="searchName"
+			parameterType="String" 
+			resultType="com.office.booklink.library.LibraryDto">
+			SELECT * FROM TBL_LIBRARY
+			WHERE L_NAME LIKE CONCAT('%', #{NAME}, '%')
+	</select>
+	
+	<select id="searchRegion"
+			parameterType="String" 
+			resultType="com.office.booklink.library.LibraryDto">
+			SELECT * FROM TBL_LIBRARY
+			WHERE L_ADDRESS LIKE CONCAT('%', #{region}, '%')
+	</select>
+	
+	<select id="findByTitle"
+	        parameterType="String"
+	        resultType="com.office.booklink.library.LibraryDto">
+		    SELECT * FROM TBL_LIBRARY
+		    WHERE L_NAME LIKE CONCAT('%', #{title}, '%')
+	</select>
+	
+	<select id="findByTitleAndRegion"
+	        parameterType="map"
+	        resultType="com.office.booklink.library.LibraryDto">
+		    SELECT * FROM TBL_LIBRARY
+		    WHERE L_NAME LIKE CONCAT('%', #{title}, '%')
+		    AND L_ADDRESS LIKE CONCAT('%', #{region}, '%')
+	</select>
+	
+	<select id="getLibrariesWithinRadius" resultType="com.office.booklink.library.LibraryDto">
+	    SELECT *
+	    FROM TBL_LIBRARY
+	    WHERE ST_Distance_Sphere(
+	        point(L_LONGITUDE, L_LATITUDE), 
+	        point(#{longitude}, #{latitude})
+	    ) &lt;= 2400	<!-- 1000 = 반경 1km  -->
+	</select>
 
 </mapper>
