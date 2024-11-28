@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
-public interface LibraryDao {
+public interface ILibraryMapper {
 
 	List<LibraryDto> searchRegion(String region);
 

@@ -3,7 +3,7 @@ package com.office.booklink.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.office.booklink.library.LibraryDao;
+import com.office.booklink.library.ILibraryMapper;
 import com.office.booklink.library.LibraryRepository;
 
 import lombok.extern.log4j.Log4j2;
