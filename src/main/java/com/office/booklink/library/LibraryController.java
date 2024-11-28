@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -82,4 +83,12 @@ public class LibraryController {
             return libraries;
 
     }
+    
+    // 대출 가능 여부 도서관 찾기
+    @GetMapping("/nearbyLibraries")
+    public List<LibraryDto> getNearbyLibraries(@RequestParam("latitude") double latitude, 
+                                             @RequestParam("longitude") double longitude) {
+        return libraryService.getNearbyLibraries(latitude, longitude);
+    }
+    
 }

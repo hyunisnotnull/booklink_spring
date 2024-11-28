@@ -2,6 +2,7 @@ package com.office.booklink.library;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,5 +41,16 @@ public class LibraryService {
 		log.info("search library with name: {}", name);
 		
 		return libraryDao.searchName(name);
+	}
+
+	public List<LibraryDto> getNearbyLibraries(@Param("latitude") double latitude,@Param("longitude") double longitude) {
+		log.info("Latitude: {}, Longitude: {}", latitude, longitude);
+		
+	    // DB에서 도서관 데이터 조회
+	    List<LibraryDto> libraries = libraryDao.getLibrariesWithinRadius(latitude, longitude);
+
+	    log.info("Retrieved libraries: {}", libraries);
+
+	    return libraries;
 	}
 }
