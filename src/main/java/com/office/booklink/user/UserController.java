@@ -54,6 +54,30 @@ public class UserController {
 		
 	}
 	
+	
+	@PostMapping("/modifyUser")
+	public ResponseEntity<Object> modifyUser(@RequestBody UserDto user) {
+		log.info("[userController] modifyUser()");
+		log.info(user);
+		userService.modifyUser(user);
+		UserDto resultDto = new UserDto();
+		resultDto.setU_ID(user.getU_ID());
+		
+		return ResponseEntity.ok(resultDto);
+		
+	}
+
+	@PostMapping("/deleteUser")
+	public ResponseEntity<Object> deleteUser(@RequestBody UserDto user) {
+		log.info("[userController] deleteUser()");
+		log.info(user);
+		userService.deleteUser(user);
+		UserDto resultDto = new UserDto();
+		resultDto.setU_ID(user.getU_ID());
+		
+		return ResponseEntity.ok(resultDto);
+		
+	}
 	@GetMapping("/testUser")
 	public BodyBuilder testUser(@CookieValue("token") String value) {
 		log.info("[userController] testUser()");

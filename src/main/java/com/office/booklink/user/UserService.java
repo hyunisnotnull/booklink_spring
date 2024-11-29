@@ -3,9 +3,6 @@ package com.office.booklink.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.office.booklink.library.ILibraryMapper;
-import com.office.booklink.library.LibraryRepository;
-
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -13,22 +10,36 @@ import lombok.extern.log4j.Log4j2;
 public class UserService {
 
 	@Autowired
-    private UserDao userDao;
+    private UserMapper userMapper;
 
-	public UserService (UserDao userDao) {
-		this.userDao = userDao;
+	public UserService (UserMapper userMapper) {
+		this.userMapper = userMapper;
 		
 	}
 	
 	public UserDto isUser(UserDto user) {
 		log.info("[userService] isUser()");
 	
-		return userDao.isUser(user);
+		return userMapper.isUser(user);
 	}
 
 	public UserDto addUser(UserDto user) {
 		log.info("[userService] addUser()");
-		return userDao.addUser(user);
+		return userMapper.addUser(user);
+	}
+
+	public UserDto modifyUser(UserDto user) {
+		log.info("[userService] modifyUser()");
+		log.info(user);
+		return userMapper.modifyUser(user);
+		
+	}
+
+	public UserDto deleteUser(UserDto user) {
+		log.info("[userService] deletefyUser()");
+		log.info(user);
+		return userMapper.deleteUser(user);
+		
 	}
 
 }
