@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.office.booklink.user.UserDao">
+<mapper namespace="com.office.booklink.user.UserMapper">
 
 <select id="isUser"
 		parameterType="com.office.booklink.user.UserDto" 
@@ -13,11 +13,32 @@
 <select id="addUser"
 		parameterType="com.office.booklink.user.UserDto" 
 		resultType="com.office.booklink.user.UserDto">
-		insert into tbl_user
+		INSERT INTO TBL_USER
 		(U_ID, U_PW, U_PHONE, U_SEX, U_AGE, 
 		U_POST_ADDRESS, U_DETAIL_ADDRESS)
 		VALUES (#{U_ID}, #{U_PW}, #{U_PHONE}, #{U_SEX}, #{U_AGE}, 
 		#{U_POST_ADDRESS}, #{U_DETAIL_ADDRESS}) 
 </select>
+
+<select id="modifyUser"
+		parameterType="com.office.booklink.user.UserDto" 
+		resultType="com.office.booklink.user.UserDto">
+		UPDATE TBL_USER
+		SET 
+		<if test='U_PW != ""'>
+			U_PW=#{U_PW},
+ 		</if>
+		U_PHONE=#{U_PHONE}, U_SEX=#{U_SEX}, U_AGE=#{U_AGE}, 
+		U_POST_ADDRESS=#{U_POST_ADDRESS}, U_DETAIL_ADDRESS=#{U_DETAIL_ADDRESS} 
+		WHERE U_ID=#{U_ID}
+</select>
+
+<select id="deleteUser"
+		parameterType="com.office.booklink.user.UserDto" 
+		resultType="com.office.booklink.user.UserDto">
+		DELETE FROM TBL_USER
+		WHERE U_ID=#{U_ID}
+</select>
+
 
 </mapper>

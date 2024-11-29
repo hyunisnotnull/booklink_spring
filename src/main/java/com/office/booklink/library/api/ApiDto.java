@@ -1,4 +1,4 @@
-package com.office.booklink.library;
+package com.office.booklink.library.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

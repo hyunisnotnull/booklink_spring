@@ -1,4 +1,4 @@
-package com.office.booklink.library;
+package com.office.booklink.library.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,23 +11,23 @@ public class ApiService {
 	
 	
 	@Autowired
-	private ApiDao apiDao;
+	private ApiMapper apiMapper;
 
-	public ApiService (ApiDao apiDao) {
-		this.apiDao = apiDao;
+	public ApiService (ApiMapper apiMapper) {
+		this.apiMapper = apiMapper;
 		
 	}
 	
 	public int getCount(String userIp) {
-		return apiDao.getCount(userIp);
+		return apiMapper.getCount(userIp);
 	}
 
 	public void addCount(String userIp) {
-		apiDao.addCount(userIp);
+		apiMapper.addCount(userIp);
 	}
 
 	public void addNew(String userIp) {
-		apiDao.addNew(userIp);
+		apiMapper.addNew(userIp);
 	}
 
 }
