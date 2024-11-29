@@ -64,7 +64,7 @@ public class LibraryController {
     		return ResponseEntity.ok(libraries);
     		
 		} catch (Exception e) {
-			log.error("Error during searchByName:", e);
+			log.error("Error during searchLibraryByName:", e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body(Collections.emptyList());
 		}
