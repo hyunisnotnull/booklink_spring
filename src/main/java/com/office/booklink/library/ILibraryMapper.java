@@ -13,9 +13,9 @@ public interface ILibraryMapper {
 	List<LibraryDto> searchName(String name);
 
 
-	List<LibraryDto> findByTitle(String title);
+	List<LibraryDto> findByTitle(@Param("title") String title);
 
-	List<LibraryDto> findByTitleAndRegion(String title, String region);
+	List<LibraryDto> findByTitleAndRegion(@Param("title") String title, @Param("region") String region);
 
 	List<LibraryDto> getLibrariesWithinRadius(@Param("latitude") double latitude,@Param("longitude") double longitude);
 
