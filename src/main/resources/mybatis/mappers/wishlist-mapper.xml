@@ -13,6 +13,7 @@
     <select id="selectUserWishBooks" parameterType="String" resultType="com.office.booklink.user.wishlist.WishBookDto">
         SELECT * FROM TBL_WISHLIST
         WHERE W_U_ID = #{userId}
+        ORDER BY W_NO DESC
     </select>
     
     <delete id="deleteWishBook" parameterType="com.office.booklink.user.wishlist.WishBookDto">

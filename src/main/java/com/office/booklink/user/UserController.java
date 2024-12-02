@@ -38,7 +38,7 @@ public class UserController {
 	
 	@PostMapping("/addUser")
 	public ResponseEntity<Object> addUser(@RequestBody UserDto user) {
-		log.info("[userController] addUser()");
+		log.info("[userController] addUser(): {}", user);
 		if(userService.isUser(user) != null) {
 			return ResponseEntity.ok(new UserDto());
 	               	
@@ -54,8 +54,7 @@ public class UserController {
 	
 	@PostMapping("/modifyUser")
 	public ResponseEntity<Object> modifyUser(@RequestBody UserDto user) {
-		log.info("[userController] modifyUser()");
-		log.info(user);
+		log.info("[userController] modifyUser(): {}", user);
 		userService.modifyUser(user);
 		UserDto resultDto = new UserDto();
 		resultDto.setU_ID(user.getU_ID());
