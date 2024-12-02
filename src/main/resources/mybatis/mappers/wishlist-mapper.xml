@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.booklink.user.wishlist.WishlistMapper">
+	
+	<insert id="insertWishBook" parameterType="com.office.booklink.user.wishlist.WishBookDto">
+        INSERT INTO TBL_WISHLIST 
+        (W_U_ID, W_ISBN13, W_AUTHORS, W_NAME, W_PUBLISHER, W_BOOKIMAGEURL)
+        VALUES 
+        (#{W_U_ID}, #{W_ISBN13}, #{W_AUTHORS}, #{W_NAME}, #{W_PUBLISHER}, #{W_BOOKIMAGEURL})
+    </insert>
+    
+    <select id="selectUserWishBooks" parameterType="String" resultType="com.office.booklink.user.wishlist.WishBookDto">
+        SELECT * FROM TBL_WISHLIST
+        WHERE W_U_ID = #{userId}
+    </select>
+    
+    <delete id="deleteWishBook" parameterType="com.office.booklink.user.wishlist.WishBookDto">
+        DELETE FROM TBL_WISHLIST
+        WHERE W_U_ID = #{W_U_ID} AND W_ISBN13 = #{W_ISBN13}
+    </delete>
+
+</mapper>
