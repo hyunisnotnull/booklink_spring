@@ -1,6 +1,5 @@
 package com.office.booklink.user;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.office.booklink.util.JwtUtils;
 
 import io.jsonwebtoken.Claims;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
