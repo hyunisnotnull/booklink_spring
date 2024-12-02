@@ -14,10 +14,18 @@
 		parameterType="com.office.booklink.user.UserDto" 
 		resultType="com.office.booklink.user.UserDto">
 		INSERT INTO TBL_USER
-		(U_ID, U_PW, U_PHONE, U_SEX, U_AGE, 
-		U_POST_ADDRESS, U_DETAIL_ADDRESS)
+		(U_ID, U_PW, U_PHONE, U_SEX, U_AGE, U_ZIPCODE,
+		U_POST_ADDRESS, U_DETAIL_ADDRESS
+		<if test='U_SNS_ID != ""'>
+			,U_SNS_ID
+ 		</if>
+		)
 		VALUES (#{U_ID}, #{U_PW}, #{U_PHONE}, #{U_SEX}, #{U_AGE}, 
-		#{U_POST_ADDRESS}, #{U_DETAIL_ADDRESS}) 
+		#{U_ZIPCODE}, #{U_POST_ADDRESS}, #{U_DETAIL_ADDRESS}
+		<if test='U_SNS_ID != ""'>
+			,#{U_SNS_ID}
+ 		</if>
+ 		) 
 </select>
 
 <select id="modifyUser"
@@ -28,7 +36,10 @@
 		<if test='U_PW != ""'>
 			U_PW=#{U_PW},
  		</if>
-		U_PHONE=#{U_PHONE}, U_SEX=#{U_SEX}, U_AGE=#{U_AGE}, 
+ 		<if test='U_SNS_ID != ""'>
+			U_SNS_ID=#{U_SNS_ID},
+ 		</if>
+		U_PHONE=#{U_PHONE}, U_SEX=#{U_SEX}, U_AGE=#{U_AGE}, U_ZIPCODE=#{U_ZIPCODE}, 
 		U_POST_ADDRESS=#{U_POST_ADDRESS}, U_DETAIL_ADDRESS=#{U_DETAIL_ADDRESS} 
 		WHERE U_ID=#{U_ID}
 </select>

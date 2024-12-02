@@ -14,6 +14,7 @@ public class UserDto {
 	private String U_PHONE;
 	private String U_SEX;
 	private String U_AGE;
+	private String U_ZIPCODE;
 	private String U_POST_ADDRESS;
 	private String U_DETAIL_ADDRESS;
 	private String U_SNS_ID;
