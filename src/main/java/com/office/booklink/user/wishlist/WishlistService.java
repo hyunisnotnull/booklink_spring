@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.office.booklink.library.LibraryDto;
+
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -49,6 +51,11 @@ public class WishlistService {
 		log.info("cancleWishBook()");
 		wishlistMapper.deleteMyLibrary(wishLibraryDto);
 		
+	}
+
+	public List<LibraryDto> getUserWishLibraries(String userId) {
+		log.info("getUserWishLibraries() : {}", userId);
+	    return wishlistMapper.selectUserWishLibraries(userId);
 	}
 
 }

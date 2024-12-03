@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.office.booklink.library.LibraryDto;
+
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -116,5 +118,20 @@ public class WishlistController {
         }
     }
     
+    @PostMapping("/wishLibrarys")
+    public ResponseEntity<Object> getUserWishLibraries(@RequestBody Map<String, String> requestBody) {
+        String userId = requestBody.get("userId");
+
+        log.info("[WishlistController] getUserWishLibraries() : {}", userId);
+
+        try {
+            // 사용자 찜한 도서관 목록 가져오기
+            List<LibraryDto> wishLibraries = wishlistService.getUserWishLibraries(userId);
+            return ResponseEntity.ok(wishLibraries);
+        } catch (Exception e) {
+            log.error("[WishlistController] 찜한 도서관 목록 조회 실패", e);
+            return ResponseEntity.status(500).body("찜한 도서관 목록 조회 실패");
+        }
+    }
 
 }
