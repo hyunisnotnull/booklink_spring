@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -67,6 +68,21 @@ public class WishlistController {
         } catch (Exception e) {
             log.error("[WishlistController] 찜 취소 실패", e);
             return ResponseEntity.status(500).body("찜 취소 실패");
+        }
+    }
+    
+    // 읽음 상태 처리
+    @PutMapping("/readWishBook")
+    public ResponseEntity<Object> readWishBook(@RequestBody WishBookDto wishBookDto) {
+        log.info("[WishlistController] readWishBook() : {}", wishBookDto);
+
+        try {
+            // 읽음 상태 처리
+            wishlistService.readWishBook(wishBookDto);
+            return ResponseEntity.ok("읽었슴다");
+        } catch (Exception e) {
+            log.error("[WishlistController] 에러발생~~~", e);
+            return ResponseEntity.status(500).body("읽음 처리 실패");
         }
     }
     

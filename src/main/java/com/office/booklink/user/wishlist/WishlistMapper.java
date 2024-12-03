@@ -14,4 +14,6 @@ public interface WishlistMapper {
 
 	void deleteWishBook(WishBookDto wishBookDto);
 
+	void updateWishBook(WishBookDto wishBookDto);
+
 }
