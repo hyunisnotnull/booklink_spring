@@ -16,4 +16,8 @@ public interface WishlistMapper {
 
 	void updateWishBook(WishBookDto wishBookDto);
 
+	void insertMyLibrary(WishLibraryDto wishLibraryDto);
+
+	void deleteMyLibrary(WishLibraryDto wishLibraryDto);
+
 }

@@ -39,4 +39,16 @@ public class WishlistService {
 		
 	}
 
+	public void addMyLibrary(WishLibraryDto wishLibraryDto) {
+		log.info("addMyLibrary() : {}", wishLibraryDto);
+		wishlistMapper.insertMyLibrary(wishLibraryDto);
+		
+	}
+
+	public void cancleMyLibrary(WishLibraryDto wishLibraryDto) {
+		log.info("cancleWishBook()");
+		wishlistMapper.deleteMyLibrary(wishLibraryDto);
+		
+	}
+
 }
