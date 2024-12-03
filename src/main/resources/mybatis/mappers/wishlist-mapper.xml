@@ -26,5 +26,17 @@
 	    SET W_B_READ = #{W_B_READ}
 	    WHERE W_U_ID = #{W_U_ID} AND W_ISBN13 = #{W_ISBN13}
     </update>
+    
+    <insert id="insertMyLibrary" parameterType="com.office.booklink.user.wishlist.WishLibraryDto">
+        INSERT INTO TBL_MY_LIBRARY 
+        (ML_U_ID, ML_L_CODE)
+        VALUES 
+        (#{ML_U_ID}, #{ML_L_CODE})
+    </insert>
+    
+    <delete id="deleteMyLibrary" parameterType="com.office.booklink.user.wishlist.WishLibraryDto">
+        DELETE FROM TBL_MY_LIBRARY
+        WHERE ML_U_ID = #{ML_U_ID} AND ML_L_CODE = #{ML_L_CODE}
+    </delete>
 
 </mapper>

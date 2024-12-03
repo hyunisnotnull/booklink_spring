@@ -86,5 +86,35 @@ public class WishlistController {
         }
     }
     
+    // 도서관 찜하기
+    @PostMapping("/addMyLibrary")
+    public ResponseEntity<Object> addMyLibrary(@RequestBody WishLibraryDto wishLibraryDto) {
+    	log.info("[WishListController] wishLibraryDto() : {}", wishLibraryDto);
+
+        try {
+            // UserService에서 찜하기 처리
+        	wishlistService.addMyLibrary(wishLibraryDto);
+            return ResponseEntity.ok("찜하기 성공");
+        } catch (Exception e) {
+            log.error("[userController] 찜하기 실패", e);
+            return ResponseEntity.status(500).body("찜하기 실패");
+        }
+    }
+    
+    // 도서관 찜 취소
+    @DeleteMapping("/cancleMyLibrary")
+    public ResponseEntity<Object> cancleMyLibrary(@RequestBody WishLibraryDto wishLibraryDto) {
+        log.info("[WishlistController] cancleMyLibrary() : {}", wishLibraryDto);
+
+        try {
+            // 찜한 도서 취소 처리
+            wishlistService.cancleMyLibrary(wishLibraryDto);
+            return ResponseEntity.ok("찜 취소 성공");
+        } catch (Exception e) {
+            log.error("[WishlistController] 찜 취소 실패", e);
+            return ResponseEntity.status(500).body("찜 취소 실패");
+        }
+    }
+    
 
 }
