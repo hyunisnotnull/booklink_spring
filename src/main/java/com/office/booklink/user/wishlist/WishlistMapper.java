@@ -5,6 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.office.booklink.library.LibraryDto;
+
 @Mapper
 public interface WishlistMapper {
 
@@ -19,5 +21,7 @@ public interface WishlistMapper {
 	void insertMyLibrary(WishLibraryDto wishLibraryDto);
 
 	void deleteMyLibrary(WishLibraryDto wishLibraryDto);
+
+	List<LibraryDto> selectUserWishLibraries(String userId);
 
 }

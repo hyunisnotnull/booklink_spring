@@ -38,5 +38,16 @@
         DELETE FROM TBL_MY_LIBRARY
         WHERE ML_U_ID = #{ML_U_ID} AND ML_L_CODE = #{ML_L_CODE}
     </delete>
+    
+    <select id="selectUserWishLibraries" parameterType="String" resultType="com.office.booklink.library.LibraryDto">
+	    SELECT 
+	        *
+	    FROM 
+	        TBL_MY_LIBRARY ML
+	    JOIN 
+	        TBL_LIBRARY L ON ML.ML_L_CODE = L.L_CODE
+	    WHERE 
+	        ML.ML_U_ID = #{userId}
+	</select>
 
 </mapper>
