@@ -33,4 +33,10 @@ public class WishlistService {
 		
 	}
 
+	public void readWishBook(WishBookDto wishBookDto) {
+		log.info("readWishBook()");
+	    wishlistMapper.updateWishBook(wishBookDto);
+		
+	}
+
 }

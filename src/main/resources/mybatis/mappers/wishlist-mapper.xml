@@ -20,5 +20,11 @@
         DELETE FROM TBL_WISHLIST
         WHERE W_U_ID = #{W_U_ID} AND W_ISBN13 = #{W_ISBN13}
     </delete>
+    
+    <update id="updateWishBook" parameterType="com.office.booklink.user.wishlist.WishBookDto">
+        UPDATE TBL_WISHLIST
+	    SET W_B_READ = #{W_B_READ}
+	    WHERE W_U_ID = #{W_U_ID} AND W_ISBN13 = #{W_ISBN13}
+    </update>
 
 </mapper>

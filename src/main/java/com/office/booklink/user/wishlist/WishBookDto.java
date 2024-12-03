@@ -30,6 +30,9 @@ public class WishBookDto {
 
     @JsonProperty("W_BOOKIMAGEURL")
     private String W_BOOKIMAGEURL;
+    
+    @JsonProperty("W_B_READ")
+    private int W_B_READ;
 	    
 	private String W_REG_DATE;
 	private String W_MOD_DATE;
