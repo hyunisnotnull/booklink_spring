@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.booklink.admin.AdminMapper">
+
+<select id="isAdmin"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		SELECT * FROM TBL_ADMIN
+		WHERE A_ID = #{A_ID};
+</select>
+
+<select id="addAdmin"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		INSERT INTO TBL_ADMIN
+		(A_ID, A_PW, A_PHONE, A_SEX, A_AGE, A_ZIPCODE,
+		A_POST_ADDRESS, A_DETAIL_ADDRESS
+		<if test='A_SNS_ID != ""'>
+			,A_SNS_ID
+ 		</if>
+		)
+		VALUES (#{A_ID}, #{A_PW}, #{A_PHONE}, #{A_SEX}, #{A_AGE}, 
+		#{A_ZIPCODE}, #{A_POST_ADDRESS}, #{A_DETAIL_ADDRESS}
+		<if test='A_SNS_ID != ""'>
+			,#{A_SNS_ID}
+ 		</if>
+ 		) 
+</select>
+
+<select id="modifyAdmin"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		UPDATE TBL_ADMIN
+		SET 
+		<if test='A_PW != ""'>
+			A_PW=#{A_PW},
+ 		</if>
+ 		<if test='A_SNS_ID != ""'>
+			A_SNS_ID=#{A_SNS_ID},
+ 		</if>
+		A_PHONE=#{A_PHONE}, A_SEX=#{A_SEX}, A_AGE=#{A_AGE}, A_ZIPCODE=#{A_ZIPCODE}, 
+		A_POST_ADDRESS=#{A_POST_ADDRESS}, A_DETAIL_ADDRESS=#{A_DETAIL_ADDRESS} 
+		WHERE A_ID=#{A_ID}
+</select>
+
+<select id="deleteAdmin"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		DELETE FROM TBL_ADMIN
+		WHERE A_ID=#{A_ID}
+</select>
+
+
+
+</mapper>
