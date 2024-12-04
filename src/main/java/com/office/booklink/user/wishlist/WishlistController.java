@@ -99,7 +99,7 @@ public class WishlistController {
             return ResponseEntity.ok("찜하기 성공");
         } catch (Exception e) {
             log.error("[userController] 찜하기 실패", e);
-            return ResponseEntity.status(500).body("찜하기 실패");
+            return ResponseEntity.status(400).body(e.getMessage());
         }
     }
     
@@ -114,7 +114,7 @@ public class WishlistController {
             return ResponseEntity.ok("찜 취소 성공");
         } catch (Exception e) {
             log.error("[WishlistController] 찜 취소 실패", e);
-            return ResponseEntity.status(500).body("찜 취소 실패");
+            return ResponseEntity.status(400).body(e.getMessage());
         }
     }
     
