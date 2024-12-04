@@ -41,8 +41,15 @@ public class WishlistService {
 		
 	}
 
-	public void addMyLibrary(WishLibraryDto wishLibraryDto) {
+	public void addMyLibrary(WishLibraryDto wishLibraryDto) throws Exception {
 		log.info("addMyLibrary() : {}", wishLibraryDto);
+		
+		List<LibraryDto> userWishLibraries = wishlistMapper.selectUserWishLibraries(wishLibraryDto.getML_U_ID());
+		
+		if (userWishLibraries.size() >= 5) {
+            throw new Exception("찜할 수 있는 도서관은 최대 5개까지입니다.");
+        }
+		
 		wishlistMapper.insertMyLibrary(wishLibraryDto);
 		
 	}
