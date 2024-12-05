@@ -1,7 +1,6 @@
 package com.office.booklink.library;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +23,19 @@ public class LibraryService {
 	}
 	
 	public void saveLibraries(List<LibraryEntity> libraries) {
-        for (LibraryEntity library : libraries) {
-            
-        	log.info("Saving library: {}", library);
-        	
-            libraryRepository.save(library);
-        }
-    }
+	    try {
+	    	
+	        libraryRepository.saveAll(libraries);
+	    } catch (Exception e) {
+	    	for (LibraryEntity libraryEntity : libraries) {
+	    		log.info("{} ---> L_TEL: {}", libraryEntity.getL_CODE(), libraryEntity.getL_TEL()); 
+	    		log.info("LENGTH: {}", libraryEntity.getL_TEL().length());
+	    		
+	    	}
+	    	log.info(libraries);
+	        log.error("Error saving libraries: {}", libraries, e);
+	    }
+	}
 
 	public List<LibraryDto> searchRegion(String region) {
 		log.info("search library with region: {}", region);

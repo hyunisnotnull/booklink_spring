@@ -12,7 +12,6 @@ public interface ILibraryMapper {
 
 	List<LibraryDto> searchName(String name);
 
-
 	List<LibraryDto> findByTitle(@Param("title") String title);
 
 	List<LibraryDto> findByTitleAndRegion(@Param("title") String title, @Param("region") String region);
