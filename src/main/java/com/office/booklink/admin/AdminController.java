@@ -26,11 +26,11 @@ public class AdminController {
 	
 	@PostMapping("/isAdmin")
 	public ResponseEntity<Object> isAdmin(@RequestBody AdminDto admin) {
-		log.info("[adminController] isAdmin()");
+		log.info("[adminController] isAdmin() {}", admin);
 		AdminDto loginedAdminDto = adminService.isAdmin(admin);
 		
-		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
 		log.info(loginedAdminDto);
+		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
 		return ResponseEntity.ok(loginedAdminDto);
 		
 	}
@@ -71,6 +71,17 @@ public class AdminController {
 		resultDto.setA_ID(admin.getA_ID());
 		
 		return ResponseEntity.ok(resultDto);
+		
+	}
+	
+	@PostMapping("/getid")
+	public ResponseEntity<Object> getid(@RequestBody AdminDto admin) {
+		log.info("[adminController] getid() {}", admin);
+		AdminDto loginedAdminDto = adminService.getid(admin);
+		
+		log.info(loginedAdminDto);
+		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
+		return ResponseEntity.ok(loginedAdminDto);
 		
 	}
 	

@@ -14,18 +14,8 @@
 		parameterType="com.office.booklink.admin.AdminDto" 
 		resultType="com.office.booklink.admin.AdminDto">
 		INSERT INTO TBL_ADMIN
-		(A_ID, A_PW, A_PHONE, A_SEX, A_AGE, A_ZIPCODE,
-		A_POST_ADDRESS, A_DETAIL_ADDRESS
-		<if test='A_SNS_ID != ""'>
-			,A_SNS_ID
- 		</if>
-		)
-		VALUES (#{A_ID}, #{A_PW}, #{A_PHONE}, #{A_SEX}, #{A_AGE}, 
-		#{A_ZIPCODE}, #{A_POST_ADDRESS}, #{A_DETAIL_ADDRESS}
-		<if test='A_SNS_ID != ""'>
-			,#{A_SNS_ID}
- 		</if>
- 		) 
+		(A_ID, A_PW, A_PHONE, A_MAIL)
+		VALUES (#{A_ID}, #{A_PW}, #{A_PHONE}, #{A_MAIL}) 
 </select>
 
 <select id="modifyAdmin"
@@ -36,11 +26,7 @@
 		<if test='A_PW != ""'>
 			A_PW=#{A_PW},
  		</if>
- 		<if test='A_SNS_ID != ""'>
-			A_SNS_ID=#{A_SNS_ID},
- 		</if>
-		A_PHONE=#{A_PHONE}, A_SEX=#{A_SEX}, A_AGE=#{A_AGE}, A_ZIPCODE=#{A_ZIPCODE}, 
-		A_POST_ADDRESS=#{A_POST_ADDRESS}, A_DETAIL_ADDRESS=#{A_DETAIL_ADDRESS} 
+		A_PHONE=#{A_PHONE}, A_MAIL=#{A_MAIL}, A_MOD_DATE=NOW() 
 		WHERE A_ID=#{A_ID}
 </select>
 
@@ -49,6 +35,13 @@
 		resultType="com.office.booklink.admin.AdminDto">
 		DELETE FROM TBL_ADMIN
 		WHERE A_ID=#{A_ID}
+</select>
+
+<select id="getid"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		SELECT * FROM TBL_ADMIN
+		WHERE A_PHONE=#{A_PHONE}
 </select>
 
 

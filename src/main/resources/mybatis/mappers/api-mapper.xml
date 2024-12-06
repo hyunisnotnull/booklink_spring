@@ -11,7 +11,7 @@
 
 <select id="addCount"
 		parameterType="String">
-		UPDATE TBL_API SET A_COUNT = A_COUNT + 1, A_MOD_DATE=NOW()
+		UPDATE TBL_API SET A_COUNT = A_COUNT + 1, A_MOD_DATE=NOW(6)
 		WHERE A_IP = #{userIp}
 </select>
 
