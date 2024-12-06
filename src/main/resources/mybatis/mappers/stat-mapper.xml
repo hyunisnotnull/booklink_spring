@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.office.booklink.stat.StatMapper">
+    
+    <select id="selectBookReadByGender" resultType="map">
+	    SELECT
+	        DATE_FORMAT(W_REG_DATE, '%Y-%m') AS month,
+	        U_SEX AS gender,
+	        U_AGE AS age,
+	        COUNT(*) AS count
+	    FROM TBL_WISHLIST
+	    JOIN TBL_USER ON TBL_WISHLIST.W_U_ID = TBL_USER.U_ID
+	    WHERE W_B_READ = 1
+	    GROUP BY month, gender, age
+	</select>
+
+</mapper>
