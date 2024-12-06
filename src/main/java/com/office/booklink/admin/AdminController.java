@@ -74,4 +74,15 @@ public class AdminController {
 		
 	}
 	
+	@PostMapping("/getid")
+	public ResponseEntity<Object> getid(@RequestBody AdminDto admin) {
+		log.info("[adminController] getid() {}", admin);
+		AdminDto loginedAdminDto = adminService.getid(admin);
+		
+		log.info(loginedAdminDto);
+		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
+		return ResponseEntity.ok(loginedAdminDto);
+		
+	}
+	
 }

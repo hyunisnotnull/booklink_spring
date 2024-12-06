@@ -42,4 +42,9 @@ public class AdminService {
 		
 	}
 
+	public AdminDto getid(AdminDto admin) {
+		log.info("[adminService] getid() {}", admin);
+		return adminMapper.getid(admin);
+	}
+
 }

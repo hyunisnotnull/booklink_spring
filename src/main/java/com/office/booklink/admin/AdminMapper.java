@@ -13,4 +13,6 @@ public interface AdminMapper {
 
 	AdminDto deleteAdmin(AdminDto admin);
 
+	AdminDto getid(AdminDto admin);
+
 }

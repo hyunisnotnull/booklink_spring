@@ -37,6 +37,13 @@
 		WHERE A_ID=#{A_ID}
 </select>
 
+<select id="getid"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		SELECT * FROM TBL_ADMIN
+		WHERE A_PHONE=#{A_PHONE}
+</select>
+
 
 
 </mapper>
