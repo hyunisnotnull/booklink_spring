@@ -40,14 +40,15 @@
 			U_SNS_ID=#{U_SNS_ID},
  		</if>
 		U_PHONE=#{U_PHONE}, U_SEX=#{U_SEX}, U_AGE=#{U_AGE}, U_ZIPCODE=#{U_ZIPCODE}, 
-		U_POST_ADDRESS=#{U_POST_ADDRESS}, U_DETAIL_ADDRESS=#{U_DETAIL_ADDRESS} 
+		U_POST_ADDRESS=#{U_POST_ADDRESS}, U_DETAIL_ADDRESS=#{U_DETAIL_ADDRESS}, U_MOD_DATE=NOW() 
 		WHERE U_ID=#{U_ID}
 </select>
 
 <select id="deleteUser"
 		parameterType="com.office.booklink.user.UserDto" 
 		resultType="com.office.booklink.user.UserDto">
-		DELETE FROM TBL_USER
+		UPDATE TBL_USER
+		SET (U_ACTIVE) VALUES(0)
 		WHERE U_ID=#{U_ID}
 </select>
 

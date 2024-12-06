@@ -26,11 +26,11 @@ public class AdminController {
 	
 	@PostMapping("/isAdmin")
 	public ResponseEntity<Object> isAdmin(@RequestBody AdminDto admin) {
-		log.info("[adminController] isAdmin()");
+		log.info("[adminController] isAdmin() {}", admin);
 		AdminDto loginedAdminDto = adminService.isAdmin(admin);
 		
-		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
 		log.info(loginedAdminDto);
+		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
 		return ResponseEntity.ok(loginedAdminDto);
 		
 	}
