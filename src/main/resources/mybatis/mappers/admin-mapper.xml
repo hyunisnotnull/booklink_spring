@@ -44,6 +44,21 @@
 		WHERE A_PHONE=#{A_PHONE}
 </select>
 
+<select id="getpw"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		SELECT * FROM TBL_ADMIN
+		WHERE A_PHONE=#{A_PHONE} AND A_ID=#{A_ID}
+</select>
+
+<select id="updatepw"
+		parameterType="com.office.booklink.admin.AdminDto" 
+		resultType="com.office.booklink.admin.AdminDto">
+		UPDATE TBL_ADMIN 
+		SET A_PW=#{A_PW}
+		WHERE A_PHONE=#{A_PHONE} AND A_ID=#{A_ID}
+</select>
+
 
 
 </mapper>
