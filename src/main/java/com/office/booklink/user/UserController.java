@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.office.booklink.admin.AdminDto;
 import com.office.booklink.util.JwtUtils;
 
 import io.jsonwebtoken.Claims;
@@ -74,6 +75,42 @@ public class UserController {
 		return ResponseEntity.ok(resultDto);
 		
 	}
+	
+	@PostMapping("/getid")
+	public ResponseEntity<Object> getid(@RequestBody UserDto user) {
+		log.info("[userController] getid() {}", user);
+		UserDto loginedUserDto = userService.getid(user);
+		
+		log.info(loginedUserDto);
+		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
+		return ResponseEntity.ok(loginedUserDto);
+		
+	}
+
+	@PostMapping("/getpw")
+	public ResponseEntity<Object> getpw(@RequestBody UserDto user) {
+		log.info("[userController] getpw() {}", user);
+		UserDto loginedUserDto = userService.getpw(user);
+		
+		log.info(loginedUserDto);
+		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
+		return ResponseEntity.ok(loginedUserDto);
+		
+	}
+	
+	@PostMapping("/updatepw")
+	public ResponseEntity<Object> updatepw(@RequestBody UserDto user) {
+		log.info("[userController] updatepw() {}", user);
+		userService.upatepw(user);
+		UserDto loginedUserDto = userService.isUser(user);
+		
+		log.info(loginedUserDto);
+		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
+		return ResponseEntity.ok(loginedUserDto);
+		
+	}
+
+	
 	@GetMapping("/testUser")
 	public BodyBuilder testUser(@CookieValue("token") String value) {
 		log.info("[userController] testUser()");

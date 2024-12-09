@@ -52,6 +52,27 @@
 		WHERE U_ID=#{U_ID}
 </select>
 
+<select id="getid"
+		parameterType="com.office.booklink.user.UserDto" 
+		resultType="com.office.booklink.user.UserDto">
+		SELECT * FROM TBL_USER
+		WHERE U_PHONE=#{U_PHONE}
+</select>
+
+<select id="getpw"
+		parameterType="com.office.booklink.user.UserDto" 
+		resultType="com.office.booklink.user.UserDto">
+		SELECT * FROM TBL_USER
+		WHERE U_PHONE=#{U_PHONE} AND U_ID=#{U_ID}
+</select>
+
+<select id="updatepw"
+		parameterType="com.office.booklink.user.UserDto" 
+		resultType="com.office.booklink.user.UserDto">
+		UPDATE TBL_USER 
+		SET U_PW=#{U_PW}
+		WHERE U_PHONE=#{U_PHONE} AND U_ID=#{U_ID}
+</select>
 
 
 </mapper>

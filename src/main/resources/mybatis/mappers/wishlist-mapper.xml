@@ -48,6 +48,7 @@
 	        TBL_LIBRARY L ON ML.ML_L_CODE = L.L_CODE
 	    WHERE 
 	        ML.ML_U_ID = #{userId}
+	    ORDER BY ML_NO DESC
 	</select>
 
 </mapper>

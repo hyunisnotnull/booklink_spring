@@ -3,6 +3,8 @@ package com.office.booklink.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.office.booklink.admin.AdminDto;
+
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -39,6 +41,22 @@ public class UserService {
 		log.info("[userService] deletefyUser()");
 		log.info(user);
 		return userMapper.deleteUser(user);
+		
+	}
+
+	public UserDto getid(UserDto user) {
+		log.info("[userService] getid() {}", user);
+		return userMapper.getid(user);
+	}
+
+	public UserDto getpw(UserDto user) {
+		log.info("[userService] getpw() {}", user);
+		return userMapper.getpw(user);
+	}
+
+	public UserDto upatepw(UserDto user) {
+		log.info("[userService] updatepw() {}", user);
+		return userMapper.updatepw(user);
 		
 	}
 

@@ -47,4 +47,14 @@ public class AdminService {
 		return adminMapper.getid(admin);
 	}
 
+	public AdminDto getpw(AdminDto admin) {
+		log.info("[adminService] getpw() {}", admin);
+		return adminMapper.getpw(admin);
+	}
+
+	public AdminDto upatepw(AdminDto admin) {
+		log.info("[adminService] updatepw() {}", admin);
+		return adminMapper.updatepw(admin);
+	}
+
 }
