@@ -52,6 +52,7 @@ CREATE TABLE TBL_WISHLIST(
    PRIMARY KEY(W_NO)
 );
 SELECT * FROM TBL_WISHLIST;
+CREATE INDEX IDX_WISHLIST ON TBL_WISHLIST(W_ISBN13);
 
 DROP TABLE IF EXISTS TBL_EVENT;
 CREATE TABLE TBL_EVENT (
@@ -134,3 +135,23 @@ BEGIN
 END $$
 DELIMITER ;
 
+-- 매일 자정 이벤트 스케줄링
+DELIMITER $$
+CREATE EVENT IF NOT EXISTS deactivate_expired_events
+ON SCHEDULE EVERY 1 DAY 
+DO
+BEGIN
+    -- 종료일이 지나면 자동으로 비활성화 처리
+    UPDATE TBL_EVENT
+    SET E_ACTIVE = CASE
+        WHEN E_ACTIVE = 1 THEN 2  -- 홈 광고: 1 -> 2
+        WHEN E_ACTIVE = 3 THEN 4  -- 자체 광고: 3 -> 4
+        ELSE E_ACTIVE
+    END
+    WHERE E_END_DATE < NOW() AND E_ACTIVE IN (1, 3);  	-- 종료일이 지나고 홈 광고(1) 또는 자체 광고(3)만 업데이트
+END $$
+DELIMITER ;
+
+SHOW VARIABLES LIKE 'event_scheduler';
+SHOW EVENTS;											-- 이벤트 스케줄링 확인
+DROP EVENT IF EXISTS deactivate_expired_events;			-- 이벤트 스케줄링 비활성화
