@@ -15,4 +15,49 @@
 	    GROUP BY month, gender, age
 	</select>
 
+	<select id="getBookRank" resultType="map">
+	    SELECT
+	        DATE_FORMAT(W_REG_DATE, '%Y-%m') AS month,
+	        U_SEX AS gender,
+	        U_AGE AS age,
+	        W_NAME AS name,
+	        COUNT(*) AS count
+	    FROM TBL_WISHLIST
+	    JOIN TBL_USER ON TBL_WISHLIST.W_U_ID = TBL_USER.U_ID
+	    WHERE 
+	        (DATE_FORMAT(W_REG_DATE, '%Y') = #{year})
+	        AND (#{month} = 'all' OR DATE_FORMAT(W_REG_DATE, '%m') = #{month})
+        	AND (#{gender} = 'all' OR U_SEX = #{gender})
+        	AND (#{ageGroup} = 'all' OR U_AGE = #{ageGroup})
+	    GROUP BY 
+	        W_NAME, U_SEX, U_AGE, DATE_FORMAT(W_REG_DATE, '%Y-%m')
+	    ORDER BY 
+	        count DESC
+	    LIMIT 10;
+	</select>
+	
+	<select id="getLibraryRank" resultType="map">
+	    SELECT
+		    DATE_FORMAT(ML.ML_REG_DATE, '%Y-%m') AS month,
+		    L.L_NAME AS libraryName,
+		    L.L_ADDRESS AS libraryAddress,
+		    U.U_SEX AS gender,
+		    U.U_AGE AS ageGroup,
+		    COUNT(*) AS count
+		FROM TBL_MY_LIBRARY ML
+		JOIN TBL_USER U ON ML.ML_U_ID = U.U_ID
+		JOIN TBL_LIBRARY L ON ML.ML_L_CODE = L.L_CODE
+		WHERE 
+		    (DATE_FORMAT(ML.ML_REG_DATE, '%Y') = #{year})
+		    AND (#{month} = 'all' OR DATE_FORMAT(ML.ML_REG_DATE, '%m') = #{month})
+		    AND (#{gender} = 'all' OR U.U_SEX = #{gender})
+		    AND (#{ageGroup} = 'all' OR U.U_AGE = #{ageGroup})
+		    AND (#{region} = 'all' OR SUBSTRING_INDEX(L.L_ADDRESS, ' ', 1) = #{region}) -- 첫 단어만 비교
+		GROUP BY 
+		    L.L_NAME, L.L_ADDRESS, U.U_SEX, U.U_AGE, DATE_FORMAT(ML.ML_REG_DATE, '%Y-%m')
+		ORDER BY 
+		    count DESC
+		LIMIT 5;
+	</select>
+
 </mapper>
