@@ -81,10 +81,10 @@ public class WishlistController {
         try {
             // 읽음 상태 처리
             wishlistService.readWishBook(wishBookDto);
-            return ResponseEntity.ok("읽었슴다");
+            return ResponseEntity.ok("읽음 상태 변경 성공");
         } catch (Exception e) {
-            log.error("[WishlistController] 에러발생~~~", e);
-            return ResponseEntity.status(500).body("읽음 처리 실패");
+            log.error("[WishlistController] error : ", e);
+            return ResponseEntity.status(500).body("읽음 상태 변경 실패");
         }
     }
     
