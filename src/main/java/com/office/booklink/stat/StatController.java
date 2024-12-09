@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -34,5 +35,38 @@ public class StatController {
         }
     }
 	
+	// 도서 찜 순위 가지고 오기
+	@GetMapping("/getBookRank")
+	public ResponseEntity<Object> getBookRank(
+			@RequestParam("year") String year,
+	        @RequestParam("month") String month,
+	        @RequestParam("gender") String gender,
+	        @RequestParam("ageGroup") String ageGroup) {
+		log.info("[StatController] getBookRank()");
+        try {
+            List<Map<String, Object>> data = statService.getBookRank(year, month, gender, ageGroup);
+            return ResponseEntity.ok(data);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch data.");
+        }
+    }
+	
+	// 도서관 찜 순위 가지고 오기
+	@GetMapping("/getLibraryRank")
+	public ResponseEntity<Object> getLibraryRank(
+			@RequestParam("year") String year,
+	        @RequestParam("month") String month,
+	        @RequestParam("gender") String gender,
+	        @RequestParam("ageGroup") String ageGroup,
+	        @RequestParam("region") String region) {
+		log.info("[StatController] getLibraryRank()");
+        try {
+            List<Map<String, Object>> data = statService.getLibraryRank(year, month, gender, ageGroup, region);
+            log.info("data -> {}", data);
+            return ResponseEntity.ok(data);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch data.");
+        }
+    }
 
 }
