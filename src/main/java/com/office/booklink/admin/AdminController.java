@@ -84,5 +84,29 @@ public class AdminController {
 		return ResponseEntity.ok(loginedAdminDto);
 		
 	}
+
+	@PostMapping("/getpw")
+	public ResponseEntity<Object> getpw(@RequestBody AdminDto admin) {
+		log.info("[adminController] getpw() {}", admin);
+		AdminDto loginedAdminDto = adminService.getpw(admin);
+		
+		log.info(loginedAdminDto);
+		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
+		return ResponseEntity.ok(loginedAdminDto);
+		
+	}
+	
+	@PostMapping("/updatepw")
+	public ResponseEntity<Object> updatepw(@RequestBody AdminDto admin) {
+		log.info("[adminController] updatepw() {}", admin);
+		adminService.upatepw(admin);
+		AdminDto loginedAdminDto = adminService.isAdmin(admin);
+		
+		log.info(loginedAdminDto);
+		if (loginedAdminDto == null) return ResponseEntity.ok(new AdminDto());
+		return ResponseEntity.ok(loginedAdminDto);
+		
+	}
+	
 	
 }

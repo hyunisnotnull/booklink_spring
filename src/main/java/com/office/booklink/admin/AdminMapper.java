@@ -15,4 +15,8 @@ public interface AdminMapper {
 
 	AdminDto getid(AdminDto admin);
 
+	AdminDto getpw(AdminDto admin);
+
+	AdminDto updatepw(AdminDto admin);
+
 }
