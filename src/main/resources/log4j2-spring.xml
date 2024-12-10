@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+
+	<Properties>
+        <Property name="LOG_PATH">${sys:LOG_PATH}</Property>
+        <!-- <Property name="DB_CLASS_NAME">${spring:spring.datasource.driver-class-name}</Property>
+        <Property name="DB_URL">${spring:spring.datasource.url}</Property>
+        <Property name="DB_USER">${spring:spring.datasource.username}</Property>
+        <Property name="DB_PASSWORD">${spring:spring.datasource.password}</Property> -->
+    </Properties>
+
+    <!-- 콘솔에 로그 출력 설정 -->
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <!-- 기본 애플리케이션 로그 파일 출력 -->
+        <RollingFile name="RootFile" fileName="${LOG_PATH}/root/root.log"
+                     filePattern="${LOG_PATH}/root/root-%d{yyyy-MM-dd}.%i.log">
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+            </PatternLayout>
+        </RollingFile>
+
+        <!-- info 레벨 로그를 기록할 파일 설정 -->
+        <RollingFile name="InfoFile" fileName="${LOG_PATH}/info/info.log"
+                     filePattern="${LOG_PATH}/info/info-%d{yyyy-MM-dd}.%i.log">
+            <Filters>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+            </PatternLayout>
+        </RollingFile>
+
+        <!-- warn 레벨 로그를 기록할 파일 설정 -->
+        <RollingFile name="WarnFile" fileName="${LOG_PATH}/warn/warn.log"
+                     filePattern="${LOG_PATH}/warn/warn-%d{yyyy-MM-dd}.%i.log">
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+            </PatternLayout>
+        </RollingFile>
+
+        <!-- error 레벨 로그를 기록할 파일 설정 -->
+        <RollingFile name="ErrorFile" fileName="${LOG_PATH}/error/error.log"
+                     filePattern="${LOG_PATH}/error/error-%d{yyyy-MM-dd}.%i.log">
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+            </PatternLayout>
+        </RollingFile>
+        
+        <!-- JDBC 설정: 로그를 DB에 저장 -->
+        <!-- <JDBC name="DB" tableName="TBL_LOGS">
+            ConnectionSource 설정 수정
+            <ConnectionSource class="org.apache.logging.log4j.core.appender.db.jdbc.DriverManagerConnectionSource">
+                <DriverManagerConnectionSource
+                    driverClassName="${DB_CLASS_NAME}"
+                    connectionString="${DB_URL}"
+                    userName="${DB_USER}"
+                    password="${DB_PASSWORD}" />
+            </ConnectionSource>
+            <Layout>
+                <PatternLayout>
+                    <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+                </PatternLayout>
+            </Layout>
+            <ColumnMappings>
+                <ColumnMapping columnName="TIME" literal="true" pattern="%d{yyyy-MM-dd HH:mm:ss}"/>
+                <ColumnMapping columnName="LEVEL" literal="true" pattern="%level"/>
+                <ColumnMapping columnName="LOGGER" literal="true" pattern="%logger{1}"/>
+                <ColumnMapping columnName="MESSAGE" literal="true" pattern="%msg"/>
+            </ColumnMappings>
+        </JDBC> -->
+    </Appenders>
+
+    <!-- 애플리케이션 패키지 로깅 (특정 로거에 대한 설정) -->
+    <Loggers>
+        <Logger name="com.office" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="InfoFile"/>
+            <AppenderRef ref="WarnFile"/>
+            <AppenderRef ref="ErrorFile"/>
+        </Logger>
+
+        <!-- Root Logger (애플리케이션 전체에 적용되는 기본 로거 설정) -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RootFile"/>
+            <!-- <AppenderRef ref="DB"/> -->
+        </Root>
+    </Loggers>
+</Configuration>

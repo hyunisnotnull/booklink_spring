@@ -155,3 +155,14 @@ DELIMITER ;
 SHOW VARIABLES LIKE 'event_scheduler';
 SHOW EVENTS;											-- 이벤트 스케줄링 확인
 DROP EVENT IF EXISTS deactivate_expired_events;			-- 이벤트 스케줄링 비활성화
+
+CREATE TABLE TBL_LOGS (
+    L_NO INT AUTO_INCREMENT PRIMARY KEY,
+    TIME TIMESTAMP,
+    LEVEL VARCHAR(10),
+    LOGGER VARCHAR(255),
+    MESSAGE TEXT
+);
+select * from TBL_LOGS;
+DESCRIBE TBL_LOGS;
+drop table TBL_LOGS;
