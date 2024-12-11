@@ -2,10 +2,10 @@ package com.office.booklink.library.api;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.office.booklink.library.LibraryDto;
 import com.office.booklink.library.LibraryService;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
@@ -47,7 +46,7 @@ public class ApiController {
     		try {
     			apiService.addCount(userIp);
 			} catch (Exception e) {
-	    		response.sendError(404,"장난치지 말아라~~~");
+	    		response.sendError(404,"비정상적인 호출입니다.");
 				return null;
 			}
     	} else {
@@ -70,13 +69,14 @@ public class ApiController {
     	String userIp =  request.getRemoteAddr();
     	int accCount =  apiService.getCount(userIp);
     	if (accCount >= 10) {
-    		response.sendError(404,"사용 횟수 초과");
+    		response.sendError(500,"사용 횟수 초과");
     		return null;
     	} else if (accCount > 0) {
     		try {
     			apiService.addCount(userIp);
 			} catch (Exception e) {
-	    		response.sendError(404,"장난치지 말아라~~~");
+	    		response.sendError(500,"비정상적인 호출입니다.");
+	    		return null;
 			}
     	} else {
     		apiService.addNew(userIp);
@@ -90,7 +90,5 @@ public class ApiController {
 			return null;
 		}
     }
-    
-
-    
+        
 }
