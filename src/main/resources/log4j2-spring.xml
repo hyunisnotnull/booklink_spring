@@ -13,7 +13,7 @@
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1}] - %m%n</Pattern>
             </PatternLayout>
         </Console>
 
@@ -25,7 +25,7 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1}] - %m%n</Pattern>
             </PatternLayout>
         </RollingFile>
 
@@ -40,7 +40,7 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1}] - %m%n</Pattern>
             </PatternLayout>
         </RollingFile>
 
@@ -55,7 +55,7 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1}] - %m%n</Pattern>
             </PatternLayout>
         </RollingFile>
 
@@ -70,7 +70,7 @@
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
             <PatternLayout>
-                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{1} - %msg%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p [%c{1}] - %m%n</Pattern>
             </PatternLayout>
         </RollingFile>
         
@@ -84,8 +84,8 @@
 		    
 		        <Column name="TIME" pattern="%d{yyyy-MM-dd HH:mm:ss}"/>
 		        <Column name="LEVEL" pattern="%level"/>
-		        <Column name="LOGGER" pattern="%logger{1}"/>
-		        <Column name="MESSAGE" pattern="%msg"/>
+		        <Column name="LOGGER" pattern="%c{1}"/>
+		        <Column name="MESSAGE" pattern="%m"/>
 		</JDBC>
     </Appenders>
 
