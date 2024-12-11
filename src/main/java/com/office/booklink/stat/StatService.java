@@ -29,7 +29,7 @@ public class StatService {
 
 	public List<Map<String, Object>> getLibraryRank(String year, String month, String gender, String ageGroup,
 			String region) {
-		log.info("[StatService] getLibraryRank()");
+		log.info("[StatService] getLibraryRank() year={}, month={}, gender={}, ageGroup={}, region={},", year, month, gender, ageGroup, region);
 		return statMapper.getLibraryRank(year, month, gender, ageGroup, region);
 	}
 
