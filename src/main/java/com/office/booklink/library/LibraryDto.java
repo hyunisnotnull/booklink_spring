@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class LibraryDto {
 
 	private int L_NO;
-	private int L_CODE;
+	private String L_CODE;
     private String L_NAME;
     private String L_ADDRESS;
     private String L_TEL;
