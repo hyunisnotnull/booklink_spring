@@ -19,7 +19,7 @@ public class LibraryEntity {
 	
 	@Id
     @JsonProperty("libCode")
-    private int L_CODE;
+    private String L_CODE;
 
     @JsonProperty("libName")
     private String L_NAME;

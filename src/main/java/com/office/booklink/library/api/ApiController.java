@@ -2,6 +2,7 @@ package com.office.booklink.library.api;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,17 +44,23 @@ public class ApiController {
     		return null;
     	} else if (accCount > 0) {
     		try {
-				
     			apiService.addCount(userIp);
 			} catch (Exception e) {
-	    		response.sendError(404,"장난치지 말아라~~~");
+	    		response.sendError(404,"비정상적인 호출입니다.");
+				return null;
 			}
     	} else {
     		apiService.addNew(userIp);
     	}
     	
+    	try {
     	List<LibraryDto> libraries = libraryService.searchRegion(region);
             return libraries;
+		} catch (Exception e) {
+			response.sendError(500,"데이터베이스 접속 에러");
+			return null;
+		}
+
     }
     
     @GetMapping("/name/{name}")
@@ -62,18 +69,26 @@ public class ApiController {
     	String userIp =  request.getRemoteAddr();
     	int accCount =  apiService.getCount(userIp);
     	if (accCount >= 10) {
-    		response.sendError(404,"사용 횟수 초과");
+    		response.sendError(500,"사용 횟수 초과");
     		return null;
     	} else if (accCount > 0) {
-    		apiService.addCount(userIp);
+    		try {
+    			apiService.addCount(userIp);
+			} catch (Exception e) {
+	    		response.sendError(500,"비정상적인 호출입니다.");
+	    		return null;
+			}
     	} else {
     		apiService.addNew(userIp);
     	}
     	
-    	List<LibraryDto> libraries = libraryService.searchName(name);
-    	System.out.println(libraries);
-            return libraries;
+    	try {
+    		List<LibraryDto> libraries = libraryService.searchName(name);
+    		return libraries;
+		} catch (Exception e) {
+			response.sendError(500,"데이터베이스 접속 에러");
+			return null;
+		}
     }
-    
-    
+        
 }
