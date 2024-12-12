@@ -15,6 +15,15 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	@Value("${server.resource.event-img}")
 	private String serverResourceEventImg;
 	
+	@Value("${server.cors.node}")
+	private String serverCorsNode;
+	
+	@Value("${server.cors.react.user}")
+	private String serverCorsReactUser;
+	
+	@Value("${server.cors.react.admin}")
+	private String serverCorsReactAdmin;
+	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		log.info("addResourceHandlers");
@@ -27,7 +36,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "http://localhost:3001", "http://localhost:3002")
+                .allowedOrigins(serverCorsNode, serverCorsReactUser, serverCorsReactAdmin)
                 .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 	
