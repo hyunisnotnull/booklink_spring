@@ -1,7 +1,6 @@
 package com.office.booklink.event;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -109,8 +108,8 @@ public class EventController {
 	        String eventImagePath = existingEvent.getE_image(); // 기본값은 기존 이미지
 
 	        if (event_image != null && !event_image.isEmpty()) {
-	            // 새 이미지가 업로드되었으면 파일을 저장하고 경로 업데이트
-	            eventImagePath = uploadFileService.upload(UUID.randomUUID().toString(), event_image);
+	            // 새 이미지가 업로드되었으면 파일을 기존 경로에 저장
+	            eventImagePath = uploadFileService.upload(existingEvent.getE_title(), event_image);
 	        }
 
 	        // EventDto 객체에 수정된 데이터 세팅
