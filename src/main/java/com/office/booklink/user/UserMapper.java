@@ -2,8 +2,6 @@ package com.office.booklink.user;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.office.booklink.admin.AdminDto;
-
 @Mapper
 public interface UserMapper {
 

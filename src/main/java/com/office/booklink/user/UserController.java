@@ -1,18 +1,11 @@
 package com.office.booklink.user;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.ResponseEntity.BodyBuilder;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.office.booklink.admin.AdminDto;
-import com.office.booklink.util.JwtUtils;
-
-import io.jsonwebtoken.Claims;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -28,11 +21,11 @@ public class UserController {
 	@PostMapping("/isUser")
 	public ResponseEntity<Object> isUser(@RequestBody UserDto user) {
 		log.info("[userController] isUser()");
-		System.out.println(user);
+		log.info("user: {}",user);
 		UserDto loginedUserDto = userService.isUser(user);
 		
 		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
-		System.out.println(loginedUserDto);
+		log.info("loginedUserDto: {}", loginedUserDto);
 		return ResponseEntity.ok(loginedUserDto);
 		
 	}
@@ -107,32 +100,6 @@ public class UserController {
 		log.info(loginedUserDto);
 		if (loginedUserDto == null) return ResponseEntity.ok(new UserDto());
 		return ResponseEntity.ok(loginedUserDto);
-		
-	}
-
-	
-	@GetMapping("/testUser")
-	public BodyBuilder testUser(@CookieValue("token") String value) {
-		log.info("[userController] testUser()");
-//		Cookie[] list = request.getCookies();
-//		for(Cookie cookie:list) {
-//			System.out.println(cookie.getName());
-//				System.out.println(cookie.getValue());
-//		}
-		System.out.println("[userController] testUser()");
-		System.out.println(value);
-		
-		try {
-			Claims claims =  new JwtUtils().extractAllClaims(value);
-			System.out.println(claims);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println(e);
-			e.printStackTrace();
-		}
-		
-	
-		return ResponseEntity.ok();
 		
 	}
 

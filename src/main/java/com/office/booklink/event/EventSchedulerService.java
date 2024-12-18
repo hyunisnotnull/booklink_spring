@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.log4j.Log4j2;
+
+@Log4j2
 @Service
 public class EventSchedulerService {
 
@@ -44,6 +47,7 @@ public class EventSchedulerService {
         ZonedDateTime eventEndDate = ZonedDateTime.of(localEndDate, ZoneOffset.ofHours(9));
 
         // 종료일에 맞춰 비활성화 작업을 예약
+        log.info("스케줄링 등록됨: 이벤트 '{}'의 종료일 {}", eventDto.getE_title(), eventEndDate.toString());
         taskScheduler.schedule(() -> deactivateEvent(eventDto), eventEndDate.toInstant());
     }
 
@@ -51,7 +55,7 @@ public class EventSchedulerService {
     // 이벤트 비활성화 작업
     private void deactivateEvent(EventDto eventDto) {
         if (eventDto.getE_active() == 2 || eventDto.getE_active() == 4) {
-            System.out.println("이미 비활성화된 이벤트입니다: " + eventDto.getE_title());
+        	log.info("이미 비활성화된 이벤트입니다 : {} ", eventDto.getE_title());
             return;
         }
 
@@ -61,6 +65,6 @@ public class EventSchedulerService {
         eventDto.setE_active(updatedStatus);
         eventService.modifyEvent(eventDto.getE_no(), eventDto);
 
-        System.out.println("이벤트 비활성화: " + eventDto.getE_title());
+        log.info("이벤트 비활성화 : {} ", eventDto.getE_title());
     }
 }
