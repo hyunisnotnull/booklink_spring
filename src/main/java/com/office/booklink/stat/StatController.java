@@ -29,6 +29,7 @@ public class StatController {
 		log.info("[StatController] getBookReadByGender()");
         try {
             List<Map<String, Object>> data = statService.getBookReadByGender();
+            log.info("readBook : {}", data);
             return ResponseEntity.ok(data);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch data.");
@@ -45,7 +46,7 @@ public class StatController {
 		log.info("[StatController] getBookRank()");
         try {
             List<Map<String, Object>> data = statService.getBookRank(year, month, gender, ageGroup);
-            log.info("data -> {}", data);
+            log.info("wish book data -> {}", data);
             return ResponseEntity.ok(data);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to fetch data.");
