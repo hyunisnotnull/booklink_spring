@@ -17,7 +17,7 @@
 
 	<select id="getBookRank" resultType="map">
 	    SELECT
-	        W_NAME AS name,
+ 	        W_NAME AS name,
 	        COUNT(*) AS count
 	    FROM TBL_WISHLIST
 	    JOIN TBL_USER ON TBL_WISHLIST.W_U_ID = TBL_USER.U_ID
