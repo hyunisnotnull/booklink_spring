@@ -17,9 +17,6 @@
 
 	<select id="getBookRank" resultType="map">
 	    SELECT
-	        DATE_FORMAT(W_REG_DATE, '%Y-%m') AS month,
-	        U_SEX AS gender,
-	        U_AGE AS age,
 	        W_NAME AS name,
 	        COUNT(*) AS count
 	    FROM TBL_WISHLIST
@@ -36,7 +33,7 @@
         		AND (U_AGE = #{ageGroup})
         	</if>
 	    GROUP BY 
-	        W_NAME, U_SEX, U_AGE, DATE_FORMAT(W_REG_DATE, '%Y-%m')
+	        W_NAME
 	    ORDER BY 
 	        count DESC
 	    Limit 10;
